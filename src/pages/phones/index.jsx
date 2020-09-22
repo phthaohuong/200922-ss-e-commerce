@@ -36,9 +36,13 @@ class Phones extends Component {
     const { phones } = this.props;
 
     return (
-      <div className="book row">
-        {phones.map((phone, index) => this.renderPhone(phone, index))}
-      </div>
+      <>
+        <div className="book row">
+          {phones.map((phone, index) => this.renderPhone(phone, index))}
+        </div>
+
+        <div></div>
+      </>
     );
   }
 
