@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPhones } from "../../redux/actions";
-import { getPhones } from "../../selectors";
+import { getPhones } from "../../redux/selectors";
 import { Link } from "react-router-dom";
 
 import * as R from "ramda";
