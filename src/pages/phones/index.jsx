@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchPhones } from "../../redux/actions";
-import phones from "../../redux/reducers/phones";
 import { getPhones } from "../../selectors";
 import { Link } from "react-router-dom";
 
