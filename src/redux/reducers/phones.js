@@ -2,9 +2,9 @@ import * as R from "ramda";
 
 import { FETCH_PHONES_SUCCESS } from "../actionTypes";
 
-let initialState = {};
+const initialState = {};
 
-const reducer = (state = initialState, { type, payload }) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_PHONES_SUCCESS:
       //  -> RETURN ARRAY
@@ -18,5 +18,3 @@ const reducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
-
-export default reducer;

@@ -1,7 +1,7 @@
 import { connectRouter } from "connected-react-router";
 import { combineReducers } from "redux";
-
 import phones from "./phones";
+import phonesPage from "./phonesPage";
 
 const createRootReducer = (history) =>
   combineReducers({
@@ -14,6 +14,7 @@ const createRootReducer = (history) =>
 
     // Rest reducers
     phones,
+    phonesPage,
   });
 
 export default createRootReducer;
