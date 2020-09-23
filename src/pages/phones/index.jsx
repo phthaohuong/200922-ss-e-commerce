@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPhones } from "../../redux/actions";
+import { fetchPhones, loadMorePhone } from "../../redux/actions";
 import { getPhones } from "../../redux/selectors";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,6 @@ import * as R from "ramda";
 class Phones extends Component {
   renderPhone(phone, index) {
     const shortDescription = `${R.take(60, phone.description)}`;
-
     return (
       <div className="col-sm-4 col-lg-4 col-md-4 book-list" key={index}>
         <div className="thumbnail">
@@ -33,12 +32,24 @@ class Phones extends Component {
   }
 
   render() {
-    const { phones } = this.props;
-
+    const { phones, loadMorePhone } = this.props;
     return (
-      <div className="book row">
-        {phones.map((phone, index) => this.renderPhone(phone, index))}
-      </div>
+      <>
+        <div className="book row">
+          {phones.map((phone, index) => this.renderPhone(phone, index))}
+        </div>
+
+        <div className="row">
+          <div className="col-md-2">
+            <button
+              onClick={loadMorePhone}
+              className="pull-right btn btn-primary"
+            >
+              Load More
+            </button>
+          </div>
+        </div>
+      </>
     );
   }
 
@@ -52,8 +63,10 @@ const mapStateToProps = (state) => ({
   phones: getPhones(state),
 });
 
+// Nơi này chứa các function asynchronous cần gọi để chạy, đẩy lên action nhờ middleware gọi chạy giùm
 const mapDispatchToProps = {
   fetchPhones,
+  loadMorePhone,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Phones);
