@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchPhones, loadMorePhone } from "../../redux/actions";
+import {
+  fetchPhones,
+  loadMorePhone,
+  addPhoneToBasket,
+} from "../../redux/actions";
 import { getPhones } from "../../redux/selectors";
 import { Link } from "react-router-dom";
 
 import * as R from "ramda";
+import Layout from "../Layout";
 
 class Phones extends Component {
   renderPhone(phone, index) {
-    const shortDescription = `${R.take(60, phone.description)}`;
+    const { addPhoneToBasket } = this.props;
+    const shortDescription = `${R.take(60, phone.description)}...`;
     return (
       <div className="col-sm-4 col-lg-4 col-md-4 book-list" key={index}>
         <div className="thumbnail">
@@ -20,8 +26,13 @@ class Phones extends Component {
             </h4>
             <p>{shortDescription}</p>
             <p className="itemButton">
-              <button className="btn btn-primary">Buy Now!</button>
-              <Link to={`/phones/${phone.id}`} className="btn btn-default">
+              <button
+                onClick={() => addPhoneToBasket(phone.id)}
+                className="btn btn-primary"
+              >
+                Buy Now!
+              </button>
+              <Link to={`phones/${phone.id}`} className="btn btn-default">
                 More info
               </Link>
             </p>
@@ -34,7 +45,7 @@ class Phones extends Component {
   render() {
     const { phones, loadMorePhone } = this.props;
     return (
-      <>
+      <Layout>
         <div className="book row">
           {phones.map((phone, index) => this.renderPhone(phone, index))}
         </div>
@@ -49,7 +60,7 @@ class Phones extends Component {
             </button>
           </div>
         </div>
-      </>
+      </Layout>
     );
   }
 
@@ -67,6 +78,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   fetchPhones,
   loadMorePhone,
+  addPhoneToBasket,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Phones);
